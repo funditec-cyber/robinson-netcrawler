@@ -1,0 +1,3 @@
+getmac
+python-nmap
+netaddr
