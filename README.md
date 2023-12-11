@@ -1,5 +1,16 @@
 # NetCrawler
 ### Install pipenv to create a virtual environment
+- sudo apt update
+- pip3 install pipenv
+- In ``~/.profile`` may need to set the value of the ``~/.local/bin`` if it exists to your variable PATH as follows:
+  ```
+  # set PATH so it includes user's private bin if it exists
+  if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+  fi
+  ```
+
+
 ### Execute: 
 - pipenv install -r requirements.txt
 - sudo apt-get install pythonX.Y-tk, being X.Y your version of python.
