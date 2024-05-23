@@ -1,4 +1,21 @@
 # NetCrawler
+### Install pipenv to create a virtual environment
+- sudo apt update
+- pip3 install pipenv
+- In ``~/.profile`` may need to set the value of the ``~/.local/bin`` if it exists to your variable PATH as follows:
+  ```
+  # set PATH so it includes user's private bin if it exists
+  if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+  fi
+  ```
+
+
+### Execute: 
+- pipenv install -r requirements.txt
+- sudo apt-get install pythonX.Y-tk, being X.Y your version of python.
+- Configure the file config.ini with the number of octects required for your subnet and their corresponding values, usually setting their values to scan a wider of narrower network range (working with two octects so far).
+- In the bash (``pipenv run python3 interface.py``) or inside the virtual environment (``pipenv shell``) execute the runner with the command: ``python3 interface.py`` which is going to take a while.
 
 ![Capture](https://i.imgur.com/cZ28LVQ.png)
 
