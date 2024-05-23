@@ -49,7 +49,7 @@ class GUI(tk.Tk):
 
         '''Results'''
         results_frame = tk.Frame(self)
-        results_frame.grid(row=0, column=1)
+        results_frame.grid(row=2, column=0, padx=50, pady=20)
 
         # Canvas
         results_canvas = tk.Canvas(results_frame, bd=0, width=625)
@@ -108,15 +108,24 @@ class GUI(tk.Tk):
         '''IP Prefix Selection'''
         ip_frame = tk.Frame(config_win)
         ip_desc_label = tk.Label(ip_frame, text="Network prefix ").pack(side='left')
+        
         prefix1_val = tk.StringVar()
         prefix2_val = tk.StringVar()
+        prefix3_val = tk.StringVar()
 
         prefix1_val.set(self.configuration['IP_PREFIX'][0])
         prefix2_val.set(self.configuration['IP_PREFIX'][1])
+        prefix3_val.set(self.configuration['IP_PREFIX'][2])
+
         ip_prefix_form1 = tk.Entry(ip_frame, textvariable=prefix1_val, width=5).pack(side='left')
         dot = tk.Label(ip_frame, text=" . ").pack(side='left')
+        
         ip_prefix_form2 = tk.Entry(ip_frame, textvariable=prefix2_val, width=5).pack(side='left')
-        ip_suffix = tk.Label(ip_frame, text=" . X . X").pack(side='left')
+        dot = tk.Label(ip_frame, text=" . ").pack(side='left')
+
+        ip_prefix_form3 = tk.Entry(ip_frame, textvariable=prefix3_val, width=5).pack(side='left')
+
+        ip_suffix = tk.Label(ip_frame, text=" . X").pack(side='left')
         ip_frame.grid(row=1, column=0, pady=5, sticky='w')
 
         '''Reports'''
@@ -146,7 +155,7 @@ class GUI(tk.Tk):
         thread_frame.grid(row=5, column=0, pady=5, sticky='w')
 
         '''Save Button'''
-        save_button = tk.Button(config_win, text="Save", command=lambda: (fileio.save_config(prefix1_val.get(), prefix2_val.get(), freq_choice.get(), disc_choice.get(), thread_slider.get()), config_win.destroy()))  # Could probably be cleaned up (pass dict?)
+        save_button = tk.Button(config_win, text="Save", command=lambda: (fileio.save_config(prefix1_val.get(), prefix2_val.get(), prefix3_val.get(), freq_choice.get(), disc_choice.get(), thread_slider.get()), config_win.destroy()))  # Could probably be cleaned up (pass dict?)
         save_button.grid(row=6, column=0, pady=5)
 
         config_win.grab_set()  # Modal
@@ -167,7 +176,7 @@ class GUI(tk.Tk):
         self.tree.grid(row=0, column=1, sticky='nsew')
 
         style = tk.ttk.Style(self.results_view_area)
-        style.configure('Treeview', rowheight=25)
+        style.configure('Treeview', rowheight=50)
 
         for i, rec in enumerate(self.net_mon.record_list):
             self.tree.insert('', 'end', tags=('evenrow' if i % 2 else 'oddrow', i), text=str(rec.ip), values=(str(rec.mac), str(rec.oui), "Click Me"))

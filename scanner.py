@@ -77,13 +77,18 @@ class NetworkMonitor:
                         self.gui.build_result()
                         fileio.build_report(self.record_list)
             except:
-                print('Error during scan')
+                print(f'Error during scan at {addr}: {e}')
 
     '''Create multiple threads to accelerate pinging'''
     def start_scan(self):
         self.record_list[:] = []
         self.gui.clear_result_window()
-        [self.addr_queue.put(i) for i in [self.configuration['IP_PREFIX'][0] + '.' + self.configuration['IP_PREFIX'][1] + '.' + str(x) + '.' + str(y) for x in range(0, 256) for y in range(0, 256)]]
+        
+        [self.addr_queue.put(i) for i in [
+            self.configuration['IP_PREFIX'][0] + '.' + 
+            self.configuration['IP_PREFIX'][1] + '.' +
+            self.configuration['IP_PREFIX'][2] + '.' + str(y) for y in range(0, 256)]]
+
         scan_type = self.configuration['DISCOVERY']
         print('Discovering devices via brute force ping' if scan_type == 'Ping' else 'Displaying Address Resolution Protocol (ARP) Table', flush=True)
         self.run_scan = True
